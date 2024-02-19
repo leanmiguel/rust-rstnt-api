@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT * FROM table_items WHERE table_id = $1 AND item_id = $2",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "item_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "table_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "cook_time",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "90c1dcf52bd806288b6a19b14078520a8ff8f395930dcd38e6fe3b953ae41f6e"
+}

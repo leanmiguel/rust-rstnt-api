@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "DELETE FROM table_items WHERE table_id = $1 AND item_id = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int4",
+        "Int4"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "127515e7aeca05938c62e3d0fb463314507b528f7e3565e89b698f990cfaaa66"
+}
