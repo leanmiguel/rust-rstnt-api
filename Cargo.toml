@@ -1,0 +1,17 @@
+[package]
+name = "rstnt_api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.79"
+axum = "0.7.4"
+axum-macros = "0.4.1"
+dotenv = "0.15.0"
+serde = "1.0.196"
+sqlx = { version = "0.7", features = [ "runtime-tokio", "postgres", "uuid", "time" ] }
+tokio = { version = "1.36.0", features = ["macros", "rt-multi-thread"] }
+uuid = { version = "1.7.0", features = ["v4"] }
+
