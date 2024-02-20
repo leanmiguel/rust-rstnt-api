@@ -1,9 +1,9 @@
 use crate::models::Item;
+use crate::error::Error;
 
-use anyhow::{Error, anyhow};
-use sqlx::{Pool, postgres::Postgres, QueryBuilder};
+use anyhow::anyhow;
+use sqlx::{postgres::Postgres, Pool, QueryBuilder};
 use serde::{Deserialize, Serialize};
-
 
 #[derive(Debug,Clone,Deserialize)]
 pub struct ItemCreate {
@@ -14,7 +14,7 @@ impl ItemCreate{
     fn validate(&self) -> Result<(), &'static str>{
         match self.cook_time {
             cook_time if cook_time > 0 => Ok(()),
-            _ => Err("Cook time must be between 0 and 300 seconds."),        
+            _ => Err("cook time must be greater than 0."),        
         }
     }
 }
@@ -65,11 +65,11 @@ pub async fn create_items(db: &Pool<Postgres>, items: Vec<ItemCreate>, table_id:
     .filter(|item| item.validate().is_err())
     .cloned()
     .collect();
-
-    if !invalid_items.is_empty() {
-        return Err(anyhow!("Validation failed for items: {:?}", invalid_items));
-    }
     
+    if !invalid_items.is_empty() {
+        return Err(Error::AnyhowError(anyhow!("Invalid items: {:?}", invalid_items)));
+    }
+
     let mut query_builder = QueryBuilder::<Postgres>::new("INSERT INTO table_items (table_id, cook_time) ");
     query_builder.push_values(items, |mut b, new_item| {    
         b.push_bind(table_id).push_bind(new_item.cook_time);
