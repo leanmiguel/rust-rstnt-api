@@ -25,6 +25,7 @@ The test database needs to be running for the test command to work properly work
 ### Local Site Testing
 
 Below are sample cURLs for testing the localhost (assuming the port is 8020, same as the .env file)
+NOTE: since it's on deployed on a free plan, expect 1-2min delay on first call when server is cold
 
 ##### create item
 
