@@ -2,6 +2,15 @@ use rand::Rng;
 use std::time::Duration;
 use tokio::time;
 use rstnt_api::restaurant::{ItemCreate, RestaurantItem};
+use lazy_static::lazy_static;
+
+lazy_static! {
+    static ref PRINT_LOGS: bool = {
+        let args: Vec<String> = std::env::args().collect();        
+        args.contains(&"--print-logs".to_string())
+    };
+}
+
 pub async fn spawn_clients() {
     let mut interval = time::interval(Duration::from_secs(1));
 
@@ -21,7 +30,7 @@ fn get_server_endpoint() -> String {
     format!("http://localhost:{}", port)
 }
 
-async fn create_client() -> Result<(), anyhow::Error> {        
+async fn create_client() -> Result<(), anyhow::Error> {   
     let create_items = call_create_items().await?;        
     let create_item = create_items.first();
 
@@ -30,13 +39,13 @@ async fn create_client() -> Result<(), anyhow::Error> {
             let table_id = item.table_id;            
             let item_id = item.item_id;
             
-            call_get_items(table_id).await?;
-            println!("Item created: {:?}", item);
-
-            call_get_item(table_id, item_id).await?;
-            println!("Item retrieved and to delete: {:?}", item);
-            
+            call_get_items(table_id).await?;        
+            call_get_item(table_id, item_id).await?;        
             call_delete_item(table_id, item_id).await?;
+        
+            if *PRINT_LOGS {
+                println!("Item created and subsequently be deleted: {:?}", item);
+            }
         }
         None => {
             println!("No items found");

@@ -14,7 +14,7 @@ this can be done with `cargo install sqlx-cli`
     3. sqlx database create // creates the database in case it isn't theres
     4. sqlx migrate run // perform migrations
     5. cargo build
-    6. cargo run
+    6. cargo run -- --enable_client --print-logs // the cli flags turns on the code to spawn clients, and print database calls
 
 ### Testing
 

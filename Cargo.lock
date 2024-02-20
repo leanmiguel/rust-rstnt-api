@@ -1351,6 +1351,7 @@ dependencies = [
  "axum",
  "axum-macros",
  "dotenv",
+ "lazy_static",
  "rand",
  "reqwest",
  "serde",
