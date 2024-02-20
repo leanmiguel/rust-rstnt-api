@@ -5,7 +5,7 @@ use anyhow::anyhow;
 use sqlx::{postgres::Postgres, Pool, QueryBuilder};
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug,Clone,Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct ItemCreate {
     pub cook_time: i32,
 }
@@ -19,7 +19,7 @@ impl ItemCreate{
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct RestaurantItem {
     pub item_id: i32,
     pub table_id: i32,
