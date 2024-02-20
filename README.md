@@ -117,3 +117,7 @@ In an environment which is already using AWS, dropping the binary in an EC2 inst
 #### Migrations
 
 Migrations are run out of band. This was primarily for ease, to get going in a more timely manner. Figuring out the Dockerfile and embedding the migrations in the app was proving to be difficult while trying to deploy.
+
+#### Table Seeding
+
+This restaurant's app assumed amount of tables seeded is 100.
