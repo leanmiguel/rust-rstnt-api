@@ -22,6 +22,45 @@ The test database needs to be running for the test command to work properly work
 
 `cargo test --test '*'`
 
+### Local Site Testing
+
+Below are sample cURLs for testing the localhost (assuming the port is 8020, same as the .env file)
+
+##### create item
+
+```
+curl --request POST \
+  --url http://localhost:8020/api/tables/1/items \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"items": [
+		{"cook_time": 5},
+		{"cook_time": 10}
+	]
+}'
+```
+
+##### get items
+
+```
+curl --request GET \
+  --url http://localhost:8020/api/tables/1/items
+```
+
+##### get item
+
+```
+curl --request GET \
+  --url http://localhost:8020/api/tables/1/items/1
+```
+
+##### delete item
+
+```
+curl --request DELETE \
+  --url http://localhost:8020/api/tables/1/items/1
+```
+
 ### Live Site
 
 You can find the site right now on
